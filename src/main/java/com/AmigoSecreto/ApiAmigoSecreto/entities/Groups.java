@@ -1,16 +1,15 @@
 package com.AmigoSecreto.ApiAmigoSecreto.entities;
 
 import jakarta.persistence.*;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import java.security.Timestamp;
 import java.util.List;
 import java.util.UUID;
 
+
 @Getter
-@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_groups")
@@ -21,11 +20,38 @@ public class Groups {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @Column(name = "id")
+    private UUID idGroup;
     @Column(name = "name_group")
     private String nameGroup;
+    @Column(name = "createdon")
     private String createdOn;
     @Column(name = "event_date")
     private String eventDate;
-    private Status status;
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.WAITING;
+
+    public void setUsers(List<Users> users) {
+        this.users = users;
+    }
+
+    public void setIdGroup(UUID idGroup) {
+        this.idGroup = idGroup;
+    }
+
+    public void setNameGroup(String nameGroup) {
+        this.nameGroup = nameGroup;
+    }
+
+    public void setCreatedOn(String createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public void setEventDate(String eventDate) {
+        this.eventDate = eventDate;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 }
