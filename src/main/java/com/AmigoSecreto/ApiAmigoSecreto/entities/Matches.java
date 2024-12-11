@@ -4,6 +4,7 @@ package com.AmigoSecreto.ApiAmigoSecreto.entities;
 import jakarta.persistence.*;
 
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -27,4 +28,7 @@ public class Matches {
     @JoinColumn(name = "friend_id")
     private Users friend;
 
+    public Matches (){
+        this.dateMatches = LocalDate.now().toString();
+    }
 }
