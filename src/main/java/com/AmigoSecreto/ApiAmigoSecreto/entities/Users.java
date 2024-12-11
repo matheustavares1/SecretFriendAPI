@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -15,7 +16,6 @@ import java.util.UUID;
 public class Users {
 
     //CONECTA USER AO GROUP
-    @Setter
     @ManyToOne
     @JoinColumn(name = "group_id")
     @JsonBackReference
@@ -27,6 +27,9 @@ public class Users {
     private String name;
     private String email;
     private String phone;
+
+    @OneToMany(mappedBy = "userMatches")
+    private List<Matches> userId;
 
     public void setGroupId(Groups groupId) {
         this.groupId = groupId;
@@ -46,5 +49,13 @@ public class Users {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public void setFriendId(List<Matches> friendId) {
+      //  this.friendId = friendId;
+    }
+
+    public void setUserId(List<Matches> userId) {
+        this.userId = userId;
     }
 }
