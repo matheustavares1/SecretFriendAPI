@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/Groups")
@@ -25,5 +26,10 @@ public class GroupController {
     @GetMapping
     public List<Groups> getAllGroups(){
         return groupsServices.getAllGroups();
+    }
+
+    @DeleteMapping("/{idGroups}")
+    public void removeGroup(@PathVariable UUID idGroups) {
+        groupsServices.removeGroup(idGroups);
     }
 }

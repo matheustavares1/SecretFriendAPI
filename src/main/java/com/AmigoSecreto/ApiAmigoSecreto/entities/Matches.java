@@ -1,13 +1,12 @@
 package com.AmigoSecreto.ApiAmigoSecreto.entities;
-//CLASSE DE SORTEIO
 
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Getter;
 import java.time.LocalDate;
 import java.util.UUID;
 
 
-@Getter
 @Entity
 @Table(name = "tb_matches")
 public class Matches {
@@ -17,14 +16,13 @@ public class Matches {
     @Column(name = "id")
     private UUID idMatches;
     private String dateMatches;
-    private UUID IdFriend;
+    private String giver;
+    private String receiver;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private Users userMatches;
 
     @ManyToOne
     @JoinColumn(name = "groups_id")
+    @JsonBackReference
     private Groups groupMatches;
 
     public Matches (){
@@ -39,20 +37,36 @@ public class Matches {
         this.dateMatches = dateMatches;
     }
 
-    public void setUserMatches(Users userMatches) {
-        this.userMatches = userMatches;
-    }
 
     public void setGroupMatches(Groups groupMatches) {
         this.groupMatches = groupMatches;
     }
 
-    public void setFriendId(Users friendId) {
-      //  this.friendId = friendId;
+    public void setGiver(String giver) {
+        this.giver = giver;
     }
 
-    public void setIdFriend(UUID idFriend) {
-        IdFriend = idFriend;
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
     }
 
+    public UUID getIdMatches() {
+        return idMatches;
+    }
+
+    public String getDateMatches() {
+        return dateMatches;
+    }
+
+    public String getGiver() {
+        return giver;
+    }
+
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public Groups getGroupMatches() {
+        return groupMatches;
+    }
 }

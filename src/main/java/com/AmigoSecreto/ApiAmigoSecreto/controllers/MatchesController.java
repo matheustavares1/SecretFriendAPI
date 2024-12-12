@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -20,15 +21,15 @@ public class MatchesController {
         this.matchesServices = matchesServices;
     }
 
-    @DeleteMapping("/delete/{idMatches}")
-    public void deleteMatches(@PathVariable UUID idMatches) {
-        matchesServices.deleteMatches(idMatches);
+
+    @PostMapping("/{groupId}/gernerate-matches")
+    public ResponseEntity<List<Matches>> generateMatches(@PathVariable UUID groupId) {
+        return ResponseEntity.ok(matchesServices.generateMatches(groupId));
     }
 
-    @PostMapping("/random")
-    public ResponseEntity<Matches> createRandomMatch() {
-        Matches matches = matchesServices.pizeDraw();
-        return ResponseEntity.ok(matches);
+    @DeleteMapping("{idMatches}")
+    public void deleteMatches(@PathVariable UUID idMatches) {
+        matchesServices.removeMatches(idMatches);
     }
 
 }

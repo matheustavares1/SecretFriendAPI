@@ -4,7 +4,9 @@ import com.AmigoSecreto.ApiAmigoSecreto.entities.Groups;
 import com.AmigoSecreto.ApiAmigoSecreto.repositories.GroupsRespository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class GroupsServices {
@@ -16,9 +18,13 @@ public class GroupsServices {
     }
 
     public Groups addGroup(Groups group) {
+        group.setCreatedOn(LocalDate.now().toString());
         return groupsRespository.save(group);
     }
     public List<Groups> getAllGroups() {
         return groupsRespository.findAll();
+    }
+    public void removeGroup(UUID idGroup) {
+        groupsRespository.deleteById(idGroup);
     }
 }

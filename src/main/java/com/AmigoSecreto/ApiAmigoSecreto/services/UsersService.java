@@ -5,10 +5,8 @@ import com.AmigoSecreto.ApiAmigoSecreto.entities.Users;
 import com.AmigoSecreto.ApiAmigoSecreto.exceptions.NotFoundException;
 import com.AmigoSecreto.ApiAmigoSecreto.repositories.GroupsRespository;
 import com.AmigoSecreto.ApiAmigoSecreto.repositories.UsersRespository;
-
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 
 
 import java.util.List;
@@ -25,7 +23,7 @@ public class UsersService {
         this.groupsRespository = groupsRespository;
     }
 
-    public Users addUserGroup( Users user, UUID group) {
+    public Users addUserGroup(Users user, UUID group) {
         Groups groupsId = groupsRespository.findById(group)
                 .orElseThrow(NotFoundException::new);
         user.setGroupId(groupsId);
@@ -35,6 +33,7 @@ public class UsersService {
     public List<Users> getAllUsers() {
         return usersRespository.findAll();
     }
+
     public void deleteUserId(UUID id) {
         usersRespository.deleteById(id);
     }
