@@ -27,7 +27,8 @@ public class MatchesServices {
 
     //GERAR OS MATCHES
     public List<Matches> generateMatches(UUID groupId) {
-        Groups group = groupsRespository.findById(groupId).orElseThrow(NotFoundException::new);
+        Groups group = groupsRespository.findById(groupId)
+                .orElseThrow(NotFoundException::new);
         List<Users> users = group.getUsers();
         //VERIFFICAR SE A LISTA DE USUARIOS TEM MAIS DE DOIS ELEMENTOS
         if(users.size() < 2){
@@ -51,6 +52,7 @@ public class MatchesServices {
             match.setDateMatches(LocalDate.now().toString());
             matches.add(match);
         }
+
         return matchsRespository.saveAll(matches);
     }
     //DELETAR MATCHE
